@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "691823128065",
+    "project_id": "hamrolibrary-b3df4",
+    "storage_bucket": "hamrolibrary-b3df4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691823128065:android:f1e464dd5f0c3d420bda00",
+        "android_client_info": {
+          "package_name": "com.example.hamro_library"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691823128065-fcr299ibp12vamgbugj9r99dkk16a6k8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3shxDJAw2hY4_25gY2h3cbvOVo5Fswso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691823128065-fcr299ibp12vamgbugj9r99dkk16a6k8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
