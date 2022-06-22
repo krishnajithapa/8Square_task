@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hamro_library/auth/services/database_helper.dart';
 import 'package:hamro_library/home/providers/book_provider.dart';
+import 'package:hamro_library/home/services/database_helper.dart';
 import 'package:hamro_library/home/widgets/bookcard.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +16,7 @@ class _CatagoryDetailScreenState extends State<CatagoryDetailScreen> {
   final dbHelper = DatabaseHelper.instance;
   final TextEditingController _bookNameController = TextEditingController();
   final TextEditingController _bookCatagoryController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
   final GlobalKey<FormState> _fKey = GlobalKey<FormState>();
   @override
   void initState() {
@@ -54,14 +55,14 @@ class _CatagoryDetailScreenState extends State<CatagoryDetailScreen> {
     );
   }
 
-  addBook(bookName, bookCatagory) {
+  addBook(bookName, bookCatagory, priceController) {
     context.read<BookProvider>().addBook(
       {
         DatabaseHelper.columnId: null,
         DatabaseHelper.columnName: bookName,
         DatabaseHelper.columnAuthor: 'Random Kumar',
         DatabaseHelper.columnCatagory: bookCatagory,
-        DatabaseHelper.columnPrice: 500,
+        DatabaseHelper.columnPrice: int.parse(priceController),
       },
     );
 
@@ -75,8 +76,8 @@ class _CatagoryDetailScreenState extends State<CatagoryDetailScreen> {
       child: const Text("Add"),
       onPressed: () {
         if (_fKey.currentState!.validate()) {
-          dynamic result =
-              addBook(_bookNameController.text, _bookCatagoryController.text);
+          dynamic result = addBook(_bookNameController.text,
+              _bookCatagoryController.text, _priceController.text);
           if (result == String) {
             ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Error Adding Book')));
@@ -101,16 +102,22 @@ class _CatagoryDetailScreenState extends State<CatagoryDetailScreen> {
         "Enter Book Details",
         style: TextStyle(color: Colors.red),
       ),
-      content: SizedBox(
-        height: 200,
-        child: Form(
-          key: _fKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              BookField(bookNameController: _bookNameController),
-              CatagoryField(bookCatagoryController: _bookCatagoryController),
-            ],
+      content: SingleChildScrollView(
+        child: SizedBox(
+          height: 200,
+          child: Form(
+            key: _fKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Flexible(
+                    child: BookField(bookNameController: _bookNameController)),
+                Flexible(
+                    child: CatagoryField(
+                        bookCatagoryController: _bookCatagoryController)),
+                Flexible(child: PriceField(priceController: _priceController)),
+              ],
+            ),
           ),
         ),
       ),
@@ -183,6 +190,33 @@ class CatagoryField extends StatelessWidget {
       },
       decoration: const InputDecoration(
           label: Text('Catagory'), border: OutlineInputBorder()),
+    );
+  }
+}
+
+class PriceField extends StatelessWidget {
+  const PriceField({
+    Key? key,
+    required TextEditingController priceController,
+  })  : _priceController = priceController,
+        super(key: key);
+
+  final TextEditingController _priceController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      controller: _priceController,
+      decoration: const InputDecoration(
+          label: Text('Price'), border: OutlineInputBorder()),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Price cant be empty';
+        } else {
+          return null;
+        }
+      },
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hamro_library/auth/services/database_helper.dart';
 import 'package:hamro_library/home/models/book_model.dart';
 import 'package:hamro_library/home/providers/book_provider.dart';
+import 'package:hamro_library/home/services/database_helper.dart';
 import 'package:hamro_library/shared/utils/const.dart';
 import 'package:provider/provider.dart';
 
@@ -57,11 +57,13 @@ class _BookCardState extends State<BookCard> {
                 color: Colors.deepPurpleAccent,
               ),
               onChanged: (String? newValue) {
-                converToUSD(widget.book.price);
+                if (dropdownValue != newValue) {
+                  converToUSD(widget.book.price);
 
-                setState(() {
-                  dropdownValue = newValue!;
-                });
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                }
               },
               items: <String>['NPR', 'USD']
                   .map<DropdownMenuItem<String>>((String value) {
