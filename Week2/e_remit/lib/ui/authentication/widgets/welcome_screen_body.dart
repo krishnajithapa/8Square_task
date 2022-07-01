@@ -50,7 +50,7 @@ class _WelcomeBodyState extends State<WelcomeBody> {
     );
   }
 
-  Row customCarouselIndicator(BuildContext context) {
+  customCarouselIndicator(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: imgList.asMap().entries.map((entry) {

@@ -1,4 +1,8 @@
+import 'dart:developer';
+
+import 'package:e_remit/ui/personal_details/providers/details_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DropDownField extends StatefulWidget {
   const DropDownField({Key? key, required this.label, required this.menuList})
@@ -34,13 +38,6 @@ class _DropDownFieldState extends State<DropDownField> {
                 fillColor: Colors.white,
                 filled: true),
             elevation: 10,
-            hint: const Text(
-              "Choose Semester",
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400),
-            ),
             isExpanded: true,
             value: widget.menuList[0],
             items: [
@@ -51,7 +48,10 @@ class _DropDownFieldState extends State<DropDownField> {
                       ))
                   .toList()
             ],
-            onChanged: (item) {},
+            onChanged: (item) {
+              context.read<DetailsProvider>().setUserGender(item.toString());
+              log(item.toString());
+            },
           ),
         ),
       ],

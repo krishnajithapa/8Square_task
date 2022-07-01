@@ -66,7 +66,6 @@ class _SearchableFieldState extends State<SearchableField> {
     setState(() {
       searchedList = result;
     });
-    print(result);
   }
 }
 
@@ -92,7 +91,7 @@ class SearchedNationalityList extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundImage: AssetImage('assets/images/nepalflag.png'),
                 ),
                 title: Text(searchedList[index]),
@@ -122,7 +121,7 @@ class NationalityList extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundImage: AssetImage('assets/images/nepalflag.png'),
                 ),
                 title: Text(nationalityList[index]),

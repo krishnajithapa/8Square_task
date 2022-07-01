@@ -1,7 +1,11 @@
+import 'package:e_remit/ui/personal_details/models/user_data_model.dart';
+import 'package:e_remit/ui/personal_details/providers/details_provider.dart';
 import 'package:e_remit/ui/personal_details/widgets/custom_button.dart';
 import 'package:e_remit/ui/personal_details/widgets/personal_detail_screen_body.dart';
 import 'package:e_remit/utils/colors.dart';
+import 'package:e_remit/utils/routes.dart' as route;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PersonalDetailsScreen extends StatefulWidget {
   const PersonalDetailsScreen({Key? key}) : super(key: key);
@@ -79,13 +83,29 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                     onNextPressed: () {
                       if (_fKey.currentState!.validate()) {
                         FocusScope.of(context).unfocus();
-                        final isLastStep =
-                            currentScreenStep == getSteps().length - 1;
-                        setState(() {
-                          if (!isLastStep) {
-                            currentScreenStep = currentScreenStep + 1;
-                          }
-                        });
+                        // final isLastStep =
+                        //     currentScreenStep == getSteps().length - 1;
+                        // setState(() {
+                        //   if (!isLastStep) {
+                        //     currentScreenStep = currentScreenStep + 1;
+                        //   }
+                        // });
+
+                        Navigator.pushNamed(context, route.dataScreen,
+                            arguments: {
+                              "userDataModel": UserDataModel(
+                                nationality: _nationalityController.text,
+                                firstName: _firstNameController.text,
+                                lastName: _lastNameController.text,
+                                dob: _dobController.text,
+                                gender:
+                                    context.read<DetailsProvider>().userGender,
+                                idNumber: _idbController.text,
+                                residentalStatus: context
+                                    .read<DetailsProvider>()
+                                    .userResidentalStatus,
+                              )
+                            });
                       }
                     }));
       }),

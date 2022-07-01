@@ -42,7 +42,7 @@ class DetailsField extends StatelessWidget {
               : null,
           decoration: InputDecoration(
               suffixIcon: hasSuffix != null
-                  ? Icon(
+                  ? const Icon(
                       Icons.keyboard_arrow_down,
                       color: Colors.red,
                     )

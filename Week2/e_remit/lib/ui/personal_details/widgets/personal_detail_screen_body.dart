@@ -44,7 +44,6 @@ class _PersonalDetailScreen1BodyState extends State<PersonalDetailScreen1Body> {
   void didChangeDependencies() {
     widget._nationalityController.text =
         context.watch<DetailsProvider>().userNationlity;
-
     super.didChangeDependencies();
   }
 
@@ -135,7 +134,7 @@ class _PersonalDetailScreen1BodyState extends State<PersonalDetailScreen1Body> {
                 value: switchValue,
                 onChanged: (value) {
                   switchValue = !switchValue;
-                  setState(() {});
+                  context.read<DetailsProvider>().setResStatus(value);
                 }),
           )
         ],
