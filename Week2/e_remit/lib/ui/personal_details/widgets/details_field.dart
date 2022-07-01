@@ -9,13 +9,15 @@ class DetailsField extends StatelessWidget {
       required this.label,
       required this.textEditingController,
       this.needsFormatting,
-      required this.validatorFunction})
+      required this.validatorFunction,
+      this.hasSuffix})
       : super(key: key);
   final String label;
   final String hintText;
   final bool? needsFormatting;
   final TextEditingController textEditingController;
   final Function(String?) validatorFunction;
+  final bool? hasSuffix;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,6 +32,8 @@ class DetailsField extends StatelessWidget {
           ),
         ),
         TextFormField(
+          controller: textEditingController,
+          readOnly: hasSuffix != null ? true : false,
           inputFormatters: needsFormatting != null && needsFormatting == true
               ? [CardFormatter(sample: 'xxxxxx-xx-xxxx', separator: '-')]
               : [],
@@ -37,6 +41,12 @@ class DetailsField extends StatelessWidget {
               ? TextInputType.number
               : null,
           decoration: InputDecoration(
+              suffixIcon: hasSuffix != null
+                  ? Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Colors.red,
+                    )
+                  : null,
               border: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey)),
               focusedBorder: const OutlineInputBorder(

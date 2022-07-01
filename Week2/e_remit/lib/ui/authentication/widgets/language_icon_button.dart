@@ -1,3 +1,5 @@
+import 'package:e_remit/ui/personal_details/widgets/search_field.dart';
+import 'package:e_remit/utils/field_validator.dart';
 import 'package:e_remit/utils/static_data.dart';
 import 'package:flutter/material.dart';
 
@@ -53,9 +55,6 @@ class _LanguageIconButtonState extends State<LanguageIconButton> {
   }
 
   showLanguageDialog(BuildContext context) {
-    // set up the button
-
-    // show the dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -141,6 +140,40 @@ class AlertDialogBox extends StatelessWidget {
                 ),
               );
             }),
+      ),
+    );
+  }
+}
+
+class NationalitySelectDialog extends StatelessWidget {
+  const NationalitySelectDialog({
+    Key? key,
+    required this.onTap,
+  }) : super(key: key);
+  final Function(int index) onTap;
+
+  final bool isSelected = false;
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      insetPadding: EdgeInsets.zero,
+      title: const Center(
+        child: Text(
+          "Choose your nationality",
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
+      ),
+      content: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.56,
+        width: MediaQuery.of(context).size.width * 0.8,
+        child: SearchableField(
+          validatorFunction: (value) {
+            return Validator().validateNationality(value);
+          },
+        ),
       ),
     );
   }

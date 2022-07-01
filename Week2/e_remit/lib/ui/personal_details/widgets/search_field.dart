@@ -1,5 +1,8 @@
+import 'package:e_remit/ui/personal_details/providers/details_provider.dart';
+import 'package:e_remit/utils/field_validator.dart';
+import 'package:e_remit/utils/static_data.dart';
 import 'package:flutter/material.dart';
-import 'package:searchfield/searchfield.dart';
+import 'package:provider/provider.dart';
 
 class SearchableField extends StatefulWidget {
   const SearchableField({Key? key, required this.validatorFunction})
@@ -10,86 +13,122 @@ class SearchableField extends StatefulWidget {
 }
 
 class _SearchableFieldState extends State<SearchableField> {
-  String? _selectedItem;
+  bool isSearching = false;
+  List<String> searchedList = [];
+  final TextEditingController _searchController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.55,
+        child: Column(
+          children: [
+            Container(
+              color: Colors.white,
+              child: TextFormField(
+                controller: _searchController,
+                validator: (value) {
+                  return widget.validatorFunction(value);
+                },
+                decoration: const InputDecoration(
+                    hintText: 'Search nationality by name',
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.red,
+                    ),
+                    border: InputBorder.none),
+                onChanged: (value) {
+                  setState(() {
+                    isSearching = true;
+                  });
+
+                  searchNationality(capitalize(_searchController.text));
+                },
+              ),
+            ),
+            !isSearching
+                ? const NationalityList()
+                : SearchedNationalityList(searchedList: searchedList)
+          ],
+        ),
+      ),
+    );
+  }
+
+  searchNationality(value) {
+    List<String> result = [];
+    for (int i = 0; i < nationalityList.length; i++) {
+      if (nationalityList[i].contains(value)) {
+        result.add(nationalityList[i]);
+      }
+    }
+
+    setState(() {
+      searchedList = result;
+    });
+    print(result);
+  }
+}
+
+class SearchedNationalityList extends StatelessWidget {
+  const SearchedNationalityList({
+    Key? key,
+    required this.searchedList,
+  }) : super(key: key);
+
+  final List<String> searchedList;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5),
-          child: Text(
-            "Nationality",
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.grey.shade700),
-          ),
-        ),
-        SearchField(
-          validator: (value) {
-            return widget.validatorFunction(value);
-          },
-          marginColor: Colors.grey.shade300,
-          hint: 'Search country by name',
-          searchInputDecoration: const InputDecoration(
-            suffixIcon: Icon(
-              Icons.keyboard_arrow_down_rounded,
-              color: Colors.red,
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.grey,
-                width: 1,
+    return Flexible(
+      child: ListView.builder(
+          itemCount: searchedList.length,
+          itemBuilder: ((context, index) {
+            return GestureDetector(
+              onTap: () {
+                context
+                    .read<DetailsProvider>()
+                    .changeNationality(searchedList[index]);
+                Navigator.pop(context);
+              },
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/nepalflag.png'),
+                ),
+                title: Text(searchedList[index]),
               ),
-            ),
-          ),
-          maxSuggestionsInViewPort: 4,
-          itemHeight: 50,
-          suggestionsDecoration: const BoxDecoration(
-            color: Colors.white,
-          ),
-          onSubmit: (value) {
-            setState(() {
-              _selectedItem = value;
-            });
-          },
-          suggestions: <String>[
-            'Australia',
-            'Bangladesh',
-            'Cambodia',
-            'China',
-            'India',
-            'Japan',
-            'Malaysia',
-            'Nepal',
-            'Pakistan',
-            'Russia',
-            'United Kingdom',
-            'United States',
-          ]
-              .map((e) => SearchFieldListItem(e,
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(right: 5),
-                        height: 30,
-                        width: 30,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image:
-                                    AssetImage('assets/images/nepalflag.png'),
-                                fit: BoxFit.cover)),
-                      ),
-                      Text(
-                        e,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  )))
-              .toList(),
-        ),
-      ],
+            );
+          })),
+    );
+  }
+}
+
+class NationalityList extends StatelessWidget {
+  const NationalityList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: ListView.builder(
+          itemCount: nationalityList.length,
+          itemBuilder: ((context, index) {
+            return GestureDetector(
+              onTap: () {
+                context
+                    .read<DetailsProvider>()
+                    .changeNationality(nationalityList[index]);
+                Navigator.pop(context);
+              },
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/nepalflag.png'),
+                ),
+                title: Text(nationalityList[index]),
+              ),
+            );
+          })),
     );
   }
 }

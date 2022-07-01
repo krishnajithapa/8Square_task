@@ -59,3 +59,16 @@ List<String> genderList = [
   "Female",
   "Third",
 ];
+
+List<String> nationalityList = [
+  'Australian',
+  'Bangladeshi',
+  'Cambodian',
+  'Chinese',
+  'Indian',
+  'Japanese',
+  'Malaysian',
+  'Nepali',
+  'Pakistani',
+  'Russian',
+];

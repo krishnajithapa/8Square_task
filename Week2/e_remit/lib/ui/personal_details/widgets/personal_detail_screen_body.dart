@@ -1,27 +1,32 @@
+import 'package:e_remit/ui/authentication/widgets/language_icon_button.dart';
+import 'package:e_remit/ui/personal_details/providers/details_provider.dart';
 import 'package:e_remit/ui/personal_details/widgets/details_field.dart';
 import 'package:e_remit/ui/personal_details/widgets/dropdown_field.dart';
-import 'package:e_remit/ui/personal_details/widgets/search_field.dart';
 import 'package:e_remit/utils/field_validator.dart';
 import 'package:e_remit/utils/static_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PersonalDetailScreen1Body extends StatefulWidget {
-  const PersonalDetailScreen1Body({
-    Key? key,
-    required TextEditingController firstNameController,
-    required TextEditingController lastNameController,
-    required TextEditingController dobController,
-    required TextEditingController idController,
-  })  : _firstNameController = firstNameController,
+  const PersonalDetailScreen1Body(
+      {Key? key,
+      required TextEditingController firstNameController,
+      required TextEditingController lastNameController,
+      required TextEditingController dobController,
+      required TextEditingController idController,
+      required TextEditingController nationalityController})
+      : _firstNameController = firstNameController,
         _lastNameController = lastNameController,
         _dobController = dobController,
         _idController = idController,
+        _nationalityController = nationalityController,
         super(key: key);
 
   final TextEditingController _firstNameController;
   final TextEditingController _lastNameController;
   final TextEditingController _dobController;
   final TextEditingController _idController;
+  final TextEditingController _nationalityController;
 
   @override
   State<PersonalDetailScreen1Body> createState() =>
@@ -31,15 +36,39 @@ class PersonalDetailScreen1Body extends StatefulWidget {
 class _PersonalDetailScreen1BodyState extends State<PersonalDetailScreen1Body> {
   bool switchValue = false;
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    widget._nationalityController.text =
+        context.watch<DetailsProvider>().userNationlity;
+
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SearchableField(
-            validatorFunction: (value) {
-              return Validator().validateNationality(value);
+          InkWell(
+            onTap: () {
+              showNationalitySearchDialog(context);
             },
+            child: IgnorePointer(
+              child: DetailsField(
+                hintText: "",
+                label: "Nationality",
+                textEditingController: widget._nationalityController,
+                validatorFunction: (value) {
+                  return Validator().validateNationality(value);
+                },
+                hasSuffix: true,
+              ),
+            ),
           ),
           DetailsField(
             label: "First Name",
@@ -111,6 +140,21 @@ class _PersonalDetailScreen1BodyState extends State<PersonalDetailScreen1Body> {
           )
         ],
       ),
+    );
+  }
+
+  showNationalitySearchDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return NationalitySelectDialog(
+          onTap: (index) {
+            setState(() {
+              widget._nationalityController.text = nationalityList[index];
+            });
+          },
+        );
+      },
     );
   }
 }

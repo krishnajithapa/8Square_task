@@ -17,6 +17,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
   final TextEditingController _idbController = TextEditingController();
+  final TextEditingController _nationalityController = TextEditingController();
   final GlobalKey<FormState> _fKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -157,6 +158,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         lastNameController: _lastNameController,
         dobController: _dobController,
         idController: _idbController,
+        nationalityController: _nationalityController,
       ),
     );
   }
