@@ -16,7 +16,7 @@ class _LanguageIconButtonState extends State<LanguageIconButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showAlertDialog(context);
+        showLanguageDialog(context);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -34,7 +34,7 @@ class _LanguageIconButtonState extends State<LanguageIconButton> {
                         image: NetworkImage(
                           _lang.flagLogo,
                         ),
-                        fit: BoxFit.fill)),
+                        fit: BoxFit.cover)),
               ),
             ),
             const SizedBox(
@@ -52,7 +52,7 @@ class _LanguageIconButtonState extends State<LanguageIconButton> {
     );
   }
 
-  showAlertDialog(BuildContext context) {
+  showLanguageDialog(BuildContext context) {
     // set up the button
 
     // show the dialog
@@ -129,7 +129,7 @@ class AlertDialogBox extends StatelessWidget {
                             image: NetworkImage(
                               languageList[index].flagLogo,
                             ),
-                            fit: BoxFit.fill)),
+                            fit: BoxFit.cover)),
                   ),
                   trailing: currentLang == languageList[index].name
                       ? Checkbox(

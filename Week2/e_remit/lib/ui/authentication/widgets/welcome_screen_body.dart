@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_remit/ui/authentication/widgets/welcome_top_section.dart';
 import 'package:e_remit/utils/static_data.dart';
@@ -29,9 +28,8 @@ class _WelcomeBodyState extends State<WelcomeBody> {
     );
   }
 
-  SizedBox getCarousalBody(BuildContext context) {
+  getCarousalBody(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.57,
       child: CarouselSlider(
         items: imageSliders,

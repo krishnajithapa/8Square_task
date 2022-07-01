@@ -32,7 +32,10 @@ class _SearchableFieldState extends State<SearchableField> {
           marginColor: Colors.grey.shade300,
           hint: 'Search country by name',
           searchInputDecoration: const InputDecoration(
-            // contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            suffixIcon: Icon(
+              Icons.keyboard_arrow_down_rounded,
+              color: Colors.red,
+            ),
             border: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.grey,
@@ -49,25 +52,20 @@ class _SearchableFieldState extends State<SearchableField> {
             setState(() {
               _selectedItem = value;
             });
-
-            print(value);
           },
           suggestions: <String>[
-            'Afghanistan',
-            'Turkey',
-            'Germany',
-            'France',
-            'Italy',
-            'Spain',
+            'Australia',
+            'Bangladesh',
+            'Cambodia',
+            'China',
+            'India',
+            'Japan',
+            'Malaysia',
+            'Nepal',
+            'Pakistan',
+            'Russia',
             'United Kingdom',
             'United States',
-            'Canada',
-            'Australia',
-            'New Zealand',
-            'India',
-            'Indonesia',
-            'Bangladesh',
-            'Sri Lanka',
           ]
               .map((e) => SearchFieldListItem(e,
                   child: Row(
@@ -85,7 +83,7 @@ class _SearchableFieldState extends State<SearchableField> {
                       ),
                       Text(
                         e,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   )))

@@ -43,7 +43,7 @@ class _PersonalDetailScreen1BodyState extends State<PersonalDetailScreen1Body> {
           ),
           DetailsField(
             label: "First Name",
-            hintText: 'Enter your first name',
+            hintText: 'Enter first name',
             textEditingController: widget._firstNameController,
             validatorFunction: (value) {
               return Validator().validateFirstName(value);
@@ -51,7 +51,7 @@ class _PersonalDetailScreen1BodyState extends State<PersonalDetailScreen1Body> {
           ),
           DetailsField(
             label: "Last Name",
-            hintText: 'Enter your last name',
+            hintText: 'Enter last name',
             textEditingController: widget._lastNameController,
             validatorFunction: (value) {
               return Validator().validateLastName(value);
@@ -59,43 +59,41 @@ class _PersonalDetailScreen1BodyState extends State<PersonalDetailScreen1Body> {
           ),
           DetailsField(
             label: "ID Number",
-            hintText: 'Enter your id number',
+            hintText: 'Enter id number',
             textEditingController: widget._idController,
             needsFormatting: true,
             validatorFunction: (value) {
               return Validator().validateId(value);
             },
           ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  child: Column(
-                    children: [
-                      DropDownField(
-                        label: 'Gender',
-                        menuList: genderList,
-                      ),
-                    ],
-                  ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: Column(
+                  children: [
+                    DropDownField(
+                      label: 'Gender',
+                      menuList: genderList,
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: 10,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: DateField(
+                  hintText: 'Pick a Date',
+                  label: "Date of Birth",
+                  textEditingController: widget._dobController,
+                  validatorFunction: (value) {
+                    return Validator().validateDob(value);
+                  },
                 ),
-                Expanded(
-                  child: DateField(
-                    hintText: 'Pick a Date',
-                    label: "Date of Birth",
-                    textEditingController: widget._dobController,
-                    validatorFunction: (value) {
-                      return Validator().validateDob(value);
-                    },
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
           ListTile(
             contentPadding: EdgeInsets.zero,

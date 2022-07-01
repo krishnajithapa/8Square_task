@@ -1,4 +1,4 @@
-import 'package:e_remit/ui/authentication/widgets/lang_icon_button.dart';
+import 'package:e_remit/ui/authentication/widgets/language_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeTopSection extends StatelessWidget {
@@ -8,7 +8,8 @@ class WelcomeTopSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.075),
       height: MediaQuery.of(context).size.height * 0.12,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

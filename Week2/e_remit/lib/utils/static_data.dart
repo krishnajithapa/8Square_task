@@ -12,7 +12,7 @@ final List<Widget> imageSliders = imgList
     .map((item) => ClipRRect(
             child: Image.asset(
           item,
-          fit: BoxFit.fill,
+          fit: BoxFit.contain,
         )))
     .toList();
 
@@ -37,7 +37,7 @@ List<Language> languageList = [
   Language(
     "Bangladesh",
     "BD",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Flag_of_Bangladesh.svg/1200px-Flag_of_Bangladesh.svg.png",
+    "https://m.media-amazon.com/images/I/613FOV49QpL._AC_SL1500_.jpg",
   ),
 ];
 List<String> countryList = [

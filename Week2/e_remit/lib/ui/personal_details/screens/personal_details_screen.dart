@@ -1,4 +1,5 @@
-import 'package:e_remit/ui/personal_details/widgets/personal_detail_screen_1_body.dart';
+import 'package:e_remit/ui/personal_details/widgets/custom_button.dart';
+import 'package:e_remit/ui/personal_details/widgets/personal_detail_screen_body.dart';
 import 'package:e_remit/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -59,35 +60,33 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
     return Stepper(
       type: StepperType.horizontal,
       steps: getSteps(),
-      // onStepTapped: (step) {
-      //   setState(() {
-      //     FocusScope.of(context).unfocus();
-      //     currentScreenStep = step;
-      //   });
-      // },
+      onStepTapped: (step) {
+        setState(() {
+          FocusScope.of(context).unfocus();
+          currentScreenStep = step;
+        });
+      },
       currentStep: currentScreenStep,
       controlsBuilder: ((context, details) {
         return Container(
             margin: const EdgeInsets.only(top: 30),
             height: MediaQuery.of(context).size.height * 0.075,
-            child: ElevatedButton(
-              onPressed: () {
-                if (_fKey.currentState!.validate()) {
-                  FocusScope.of(context).unfocus();
-                  final isLastStep = currentScreenStep == getSteps().length - 1;
-                  setState(() {
-                    if (!isLastStep) {
-                      currentScreenStep = currentScreenStep + 1;
-                    }
-                  });
-                }
-              },
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(buttonColor),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)))),
-              child: Text("Next".toUpperCase()),
-            ));
+            child: currentScreenStep == getSteps().length - 1
+                ? CustomButton(label: 'Done', onNextPressed: () {})
+                : CustomButton(
+                    label: 'Next',
+                    onNextPressed: () {
+                      if (_fKey.currentState!.validate()) {
+                        FocusScope.of(context).unfocus();
+                        final isLastStep =
+                            currentScreenStep == getSteps().length - 1;
+                        setState(() {
+                          if (!isLastStep) {
+                            currentScreenStep = currentScreenStep + 1;
+                          }
+                        });
+                      }
+                    }));
       }),
       onStepContinue: () {
         final isLastStep = currentScreenStep == getSteps().length - 1;
@@ -105,6 +104,27 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
           }
         });
       },
+    );
+  }
+
+  ElevatedButton getNextButton(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        if (_fKey.currentState!.validate()) {
+          FocusScope.of(context).unfocus();
+          final isLastStep = currentScreenStep == getSteps().length - 1;
+          setState(() {
+            if (!isLastStep) {
+              currentScreenStep = currentScreenStep + 1;
+            }
+          });
+        }
+      },
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(buttonColor),
+          shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))),
+      child: Text("Next".toUpperCase()),
     );
   }
 

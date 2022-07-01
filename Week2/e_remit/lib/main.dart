@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
               backgroundColor: Colors.white, foregroundColor: Colors.red)),
       home: const WelcomeScreen(),
-      onGenerateRoute: route.controller,
+      onGenerateRoute: route.getRoutes,
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:e_remit/ui/authentication/widgets/login_signup_button.dart';
-import 'package:e_remit/ui/personal_details/widgets/welcomeScreenBody.dart';
+import 'package:e_remit/ui/authentication/widgets/welcome_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -12,12 +12,9 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-        body: WelcomeBody(),
-//widget for bottom buttons
-        bottomNavigationBar: BottomButtons(),
-      ),
+    return Scaffold(
+      body: WelcomeBody(),
+      bottomNavigationBar: BottomButtons(),
     );
   }
 }

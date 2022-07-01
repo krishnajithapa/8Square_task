@@ -39,7 +39,7 @@ class DetailsField extends StatelessWidget {
           decoration: InputDecoration(
               border: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey)),
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey)),
               hintText: hintText),
           validator: (value) {
