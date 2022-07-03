@@ -99,19 +99,15 @@ class _PersonalDetailScreen1BodyState extends State<PersonalDetailScreen1Body> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
-                child: Column(
-                  children: [
-                    DropDownField(
-                      label: 'Gender',
-                      menuList: genderList,
-                    ),
-                  ],
+                child: DropDownField(
+                  label: 'Gender',
+                  menuList: genderList,
                 ),
               ),
               const SizedBox(
                 width: 10,
               ),
-              Expanded(
+              Flexible(
                 child: DateField(
                   hintText: 'Pick a Date',
                   label: "Date of Birth",

@@ -28,7 +28,7 @@ class _DropDownFieldState extends State<DropDownField> {
           ),
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.076,
+          height: 60,
           child: DropdownButtonFormField(
             decoration: const InputDecoration(
                 border: OutlineInputBorder(
