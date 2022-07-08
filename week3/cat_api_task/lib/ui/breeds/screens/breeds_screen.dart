@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cat_api_task/ui/home/models/breeds.dart';
 import 'package:cat_api_task/ui/home/providers/breeds_provider.dart';
 import 'package:cat_api_task/ui/home/widgets/cat_image_card.dart';
@@ -12,7 +10,6 @@ class BreedsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("kjkdsa");
     return Center(
       child: SingleChildScrollView(
         child: Container(
@@ -45,7 +42,6 @@ class BreedsScreen extends StatelessWidget {
 
   _breedListBody(BuildContext context, breedList) {
     return Consumer<BreedsProvider>(builder: (context, ref, child) {
-      log('consumer');
       return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -68,28 +64,4 @@ class BreedsScreen extends StatelessWidget {
   }
 
   Center _getLoadingBody() => const Center(child: CircularProgressIndicator());
-}
-
-class CustomText extends StatelessWidget {
-  CustomText(
-      {Key? key,
-      required this.data,
-      this.fontColor,
-      this.fontWeight,
-      this.fontSize})
-      : super(key: key);
-  final String data;
-  double? fontSize;
-  FontWeight? fontWeight;
-  Color? fontColor;
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      data,
-      style: TextStyle(
-          fontWeight: fontWeight ?? FontWeight.normal,
-          fontSize: fontSize ?? 20,
-          color: fontColor ?? Colors.black),
-    );
-  }
 }

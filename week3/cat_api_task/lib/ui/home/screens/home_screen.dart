@@ -1,6 +1,5 @@
 import 'package:cat_api_task/ui/home/providers/screen_index_provider.dart';
 import 'package:cat_api_task/ui/home/screens/breeds_screen.dart';
-import 'package:cat_api_task/ui/home/screens/voting_screen.dart';
 import 'package:cat_api_task/ui/home/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
