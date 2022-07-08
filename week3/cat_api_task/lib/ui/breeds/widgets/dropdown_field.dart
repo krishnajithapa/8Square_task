@@ -1,4 +1,4 @@
-import 'package:cat_api_task/ui/home/models/breeds.dart';
+import 'package:cat_api_task/models/breeds.dart';
 import 'package:flutter/material.dart';
 
 class DropDownField extends StatefulWidget {

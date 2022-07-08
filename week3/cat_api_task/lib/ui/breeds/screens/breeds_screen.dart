@@ -1,8 +1,9 @@
-import 'package:cat_api_task/ui/home/models/breeds.dart';
-import 'package:cat_api_task/ui/home/providers/breeds_provider.dart';
-import 'package:cat_api_task/ui/home/widgets/cat_image_card.dart';
-import 'package:cat_api_task/ui/home/widgets/dropdown_field.dart';
+import 'package:cat_api_task/models/breeds.dart';
+import 'package:cat_api_task/ui/breeds/providers/breeds_provider.dart';
+import 'package:cat_api_task/ui/breeds/widgets/dropdown_field.dart';
+import 'package:cat_api_task/ui/home/voting/widgets/cat_image_card.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class BreedsScreen extends StatelessWidget {
@@ -55,7 +56,7 @@ class BreedsScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          CatImageCard(
+          CatInfoCard(
             ref: ref,
           )
         ],
@@ -63,5 +64,6 @@ class BreedsScreen extends StatelessWidget {
     });
   }
 
-  Center _getLoadingBody() => const Center(child: CircularProgressIndicator());
+  Center _getLoadingBody() =>
+      Center(child: Lottie.asset("assets/images/loading.json"));
 }

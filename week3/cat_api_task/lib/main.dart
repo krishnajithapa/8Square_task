@@ -1,7 +1,7 @@
-import 'package:cat_api_task/ui/home/providers/breeds_provider.dart';
+import 'package:cat_api_task/ui/breeds/providers/breeds_provider.dart';
 import 'package:cat_api_task/ui/home/providers/screen_index_provider.dart';
-import 'package:cat_api_task/ui/home/providers/voting_provider.dart';
 import 'package:cat_api_task/ui/home/screens/home_screen.dart';
+import 'package:cat_api_task/ui/voting/providers/voting_provider.dart';
 import 'package:cat_api_task/utils/colors.dart';
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           create: (context) => BreedsProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => VotingPRovider(),
+          create: (context) => VotingProvider(),
         ),
       ],
       child: MaterialApp(

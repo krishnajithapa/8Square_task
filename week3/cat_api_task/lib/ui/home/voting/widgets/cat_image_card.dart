@@ -2,8 +2,8 @@ import 'package:cat_api_task/ui/breeds/providers/breeds_provider.dart';
 import 'package:cat_api_task/ui/breeds/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
-class CatImageCard extends StatelessWidget {
-  const CatImageCard({Key? key, required this.ref}) : super(key: key);
+class CatInfoCard extends StatelessWidget {
+  const CatInfoCard({Key? key, required this.ref}) : super(key: key);
   final BreedsProvider ref;
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,7 @@ class CatImageCard extends StatelessWidget {
                 CustomText(
                   data: ref.selectedBreed!.name!.toUpperCase(),
                   fontColor: Colors.white,
+                  fontSize: 25,
                 ),
                 CustomText(
                     data: "id: ${ref.selectedBreed!.id}",
