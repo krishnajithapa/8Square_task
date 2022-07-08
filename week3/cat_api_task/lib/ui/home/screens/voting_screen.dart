@@ -1,5 +1,5 @@
 import 'package:cat_api_task/ui/home/providers/voting_provider.dart';
-import 'package:cat_api_task/ui/home/widgets/custom_button.dart';
+import 'package:cat_api_task/ui/home/widgets/voting_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,20 +47,7 @@ class VotingScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 height: MediaQuery.of(context).size.height * 0.5,
                 child: const CircularProgressIndicator()),
-        Row(
-          children: [
-            CustomButton(
-              label: "Upvote",
-              onTap: () async {},
-              imageId: context.read<VotingPRovider>().randomCat?.id! ?? "",
-            ),
-            CustomButton(
-              label: "DownVote",
-              onTap: () async {},
-              imageId: context.read<VotingPRovider>().randomCat?.id ?? "",
-            )
-          ],
-        )
+        const VotingButtons()
       ]),
     );
   }

@@ -25,7 +25,6 @@ class ApiService {
       final errorMessage = DioException.fromDioError(err).toString();
       throw errorMessage;
     } catch (e) {
-      print(e);
       throw e.toString();
     }
   }
@@ -42,7 +41,6 @@ class ApiService {
       final errorMessage = DioException.fromDioError(err).toString();
       throw errorMessage;
     } catch (e) {
-      print(e);
       throw e.toString();
     }
   }

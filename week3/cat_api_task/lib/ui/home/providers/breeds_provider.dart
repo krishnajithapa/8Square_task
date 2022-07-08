@@ -1,5 +1,5 @@
 import 'package:cat_api_task/ui/home/models/breeds.dart';
-import 'package:cat_api_task/ui/home/services/home_api_request.dart';
+import 'package:cat_api_task/ui/home/services/api_request.dart';
 import 'package:flutter/cupertino.dart';
 
 class BreedsProvider extends ChangeNotifier {
