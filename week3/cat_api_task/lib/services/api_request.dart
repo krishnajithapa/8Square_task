@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:cat_api_task/models/breeds.dart';
+import 'package:cat_api_task/models/fav_response.dart';
 import 'package:cat_api_task/models/favourite.dart';
 import 'package:cat_api_task/models/random_image.dart';
 import 'package:cat_api_task/models/vote.dart';
@@ -103,6 +104,27 @@ class ApiService {
           headers: {"x-api-key": "e31f0bfb-879f-4b08-984f-a80d7c9303ba"},
         ),
       );
+    } on DioError catch (err) {
+      final errorMessage = DioException.fromDioError(err).toString();
+      throw errorMessage;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<List<Favourite>> getFavouriteCats() async {
+    const getFavUrl = '$baseUrl/favourites';
+
+    try {
+      final response = await _dio.get(
+        getFavUrl,
+        options: Options(
+          headers: {"x-api-key": "e31f0bfb-879f-4b08-984f-a80d7c9303ba"},
+        ),
+      );
+      final jsonData = List<Map<String, dynamic>>.from(response.data);
+      final listData = jsonData.map((e) => Favourite.fromJson(e)).toList();
+      return listData;
     } on DioError catch (err) {
       final errorMessage = DioException.fromDioError(err).toString();
       throw errorMessage;

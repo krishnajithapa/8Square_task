@@ -1,21 +1,23 @@
+import 'package:cat_api_task/models/favourite.dart';
 import 'package:flutter/material.dart';
 
-class FavCatCard extends StatefulWidget {
-  const FavCatCard({Key? key}) : super(key: key);
-
-  @override
-  State<FavCatCard> createState() => _FavCatCardState();
-}
-
-class _FavCatCardState extends State<FavCatCard> {
+class FavCatCard extends StatelessWidget {
+  const FavCatCard({Key? key, required this.fav}) : super(key: key);
+  final Favourite fav;
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Row(
+      color: const Color.fromARGB(255, 201, 188, 188),
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Container(color: Colors.red, height: 100, width: 100),
-          const Text("Cat Name"),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.15,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(fav.image!.url!), fit: BoxFit.cover)),
+          ),
           ElevatedButton(onPressed: () {}, child: const Text("unfav")),
         ],
       ),

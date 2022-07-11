@@ -1,5 +1,5 @@
 import 'package:cat_api_task/ui/breeds/screens/breeds_screen.dart';
-import 'package:cat_api_task/ui/favourite/widgets/fav_cat_card.dart';
+import 'package:cat_api_task/ui/favourite/screens/favourite_screen.dart';
 import 'package:cat_api_task/ui/home/providers/screen_index_provider.dart';
 import 'package:cat_api_task/ui/home/widgets/bottom_nav_bar.dart';
 import 'package:cat_api_task/ui/voting/screens/voting_screen.dart';
@@ -43,6 +43,6 @@ List<Widget> bodyList = [
   const VotingScreen(),
   const BreedsScreen(),
   const Text("how"),
-  const FavCatCard(),
+  const FavoriteScreen(),
   const Text("you")
 ];
