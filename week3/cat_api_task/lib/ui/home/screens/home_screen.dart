@@ -1,4 +1,5 @@
 import 'package:cat_api_task/ui/breeds/screens/breeds_screen.dart';
+import 'package:cat_api_task/ui/favourite/widgets/fav_cat_card.dart';
 import 'package:cat_api_task/ui/home/providers/screen_index_provider.dart';
 import 'package:cat_api_task/ui/home/widgets/bottom_nav_bar.dart';
 import 'package:cat_api_task/ui/voting/screens/voting_screen.dart';
@@ -14,8 +15,18 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("CatMandu"),
-        elevation: 1,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/cat.png',
+              height: kToolbarHeight * 0.8,
+              color: Colors.white,
+            ),
+            const Text(" mandu"),
+          ],
+        ),
+        elevation: 0,
       ),
       body: bodyList[screenindexprovider.currentIndex],
       bottomNavigationBar: BottomNavBar(
@@ -32,6 +43,6 @@ List<Widget> bodyList = [
   const VotingScreen(),
   const BreedsScreen(),
   const Text("how"),
-  const Text("are"),
+  const FavCatCard(),
   const Text("you")
 ];

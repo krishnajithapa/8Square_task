@@ -69,7 +69,7 @@ class ApiService {
     }
   }
 
-  Future<Favourite> favouriteCat(imageId) async {
+  Future<FavResponse> favouriteCat(imageId) async {
     User user = User();
     const favouriteUrl = '$baseUrl/favourites';
 
@@ -84,7 +84,7 @@ class ApiService {
           },
         ),
       );
-      return Favourite.fromJson(response.data);
+      return FavResponse.fromJson(response.data);
     } on DioError catch (err) {
       final errorMessage = DioException.fromDioError(err).toString();
       throw errorMessage;

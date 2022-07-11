@@ -1,10 +1,10 @@
-class Favourite {
+class FavResponse {
   String? message;
   int? id;
 
-  Favourite({this.message, this.id});
+  FavResponse({this.message, this.id});
 
-  Favourite.fromJson(Map<String, dynamic> json) {
+  FavResponse.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     id = json['id'];
   }

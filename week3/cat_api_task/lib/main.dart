@@ -1,4 +1,5 @@
 import 'package:cat_api_task/ui/breeds/providers/breeds_provider.dart';
+import 'package:cat_api_task/ui/favourite/providers/favourite_provider.dart';
 import 'package:cat_api_task/ui/home/providers/screen_index_provider.dart';
 import 'package:cat_api_task/ui/home/screens/home_screen.dart';
 import 'package:cat_api_task/ui/voting/providers/voting_provider.dart';
@@ -10,7 +11,6 @@ import 'package:provider/provider.dart';
 import 'utils/routes.dart' as route;
 
 void main() {
-  ChuckerFlutter.showOnRelease = true;
   runApp(const MyApp());
 }
 
@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => VotingProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FavouriteProvider(),
         ),
       ],
       child: MaterialApp(
