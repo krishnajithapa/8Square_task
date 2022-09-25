@@ -1,5 +1,5 @@
+import 'package:dbhelper/model/models/book_model.dart';
 import 'package:flutter/material.dart';
-import 'package:hamro_library/home/models/book_model.dart';
 import 'package:hamro_library/home/providers/book_provider.dart';
 import 'package:hamro_library/home/widgets/bookcard.dart';
 import 'package:lottie/lottie.dart';

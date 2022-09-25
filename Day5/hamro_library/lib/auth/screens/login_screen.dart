@@ -41,7 +41,19 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         logginIn = true;
       });
-
+      AlertDialog alertBox = const AlertDialog(
+        title: Text("Loggin in...."),
+        content: Text(''),
+        actions: [],
+      );
+      logginIn
+          ? showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return alertBox;
+              },
+            )
+          : null;
       final pref = await SharedPreferences.getInstance();
 
       pref.setString('email', emailController.text);
@@ -52,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
           .then((value) {
         if (value != null) {
           pref.setBool('isLoggedIn', true).then((value) {
+            logginIn = false;
             Navigator.pushReplacementNamed(context, route.home);
           });
         } else {
@@ -87,116 +100,110 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return logginIn
-        ? Container(
-            color: Colors.white,
-            child: const Center(child: CircularProgressIndicator()),
-          )
-        : StackCircle(
-            child: Scaffold(
-              backgroundColor: Colors.white,
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 200),
-                  child: Column(
-                    children: [
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 24),
-                          child: Text(
-                            'Sign In',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Form(
-                          key: _fKey,
-                          child: Column(
-                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              loginNameField(emailController),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: TextFormField(
-                                    controller: passController,
-                                    obscureText: _passwordInVisible,
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.all(16),
-                                      border: const OutlineInputBorder(),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          _passwordInVisible
-                                              ? Icons.visibility_off
-                                              : Icons.visibility,
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            _passwordInVisible =
-                                                !_passwordInVisible;
-                                          });
-                                        },
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.green,
-                                        ),
-                                      ),
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.orangeAccent,
-                                          width: 2.0,
-                                        ),
-                                      ),
-                                      labelText: "Password",
-                                    ),
-                                    validator: (value) {
-                                      RegExp regex = RegExp(
-                                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$',
-                                      );
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter password';
-                                      } else {
-                                        if (!regex.hasMatch(value)) {
-                                          return 'Enter valid password';
-                                        } else {
-                                          return null;
-                                        }
-                                      }
-                                    }),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              const TextButtons(
-                                title: 'Dont have an account.',
-                                buttonText: 'Sign Up',
-                              ),
-                              SizedBox(
-                                width: 150,
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      logMeIn();
-                                    },
-                                    child: const Text(
-                                      "Login",
-                                    )),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: screenHeight * 0.2,
-                      ),
-                    ],
+    return StackCircle(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 200),
+            child: Column(
+              children: [
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 24),
+                    child: Text(
+                      'Sign In',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Form(
+                    key: _fKey,
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        loginNameField(emailController),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: TextFormField(
+                              controller: passController,
+                              obscureText: _passwordInVisible,
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.all(16),
+                                border: const OutlineInputBorder(),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _passwordInVisible
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _passwordInVisible = !_passwordInVisible;
+                                    });
+                                  },
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.orangeAccent,
+                                    width: 2.0,
+                                  ),
+                                ),
+                                labelText: "Password",
+                              ),
+                              validator: (value) {
+                                RegExp regex = RegExp(
+                                  r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$',
+                                );
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter password';
+                                } else {
+                                  if (!regex.hasMatch(value)) {
+                                    return 'Enter valid password';
+                                  } else {
+                                    return null;
+                                  }
+                                }
+                              }),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        const TextButtons(
+                          title: 'Dont have an account.',
+                          buttonText: 'Sign Up',
+                        ),
+                        SizedBox(
+                          width: 150,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                logMeIn();
+                              },
+                              child: const Text(
+                                "Login",
+                              )),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: screenHeight * 0.2,
+                ),
+              ],
             ),
-          );
+          ),
+        ),
+      ),
+    );
   }
 }

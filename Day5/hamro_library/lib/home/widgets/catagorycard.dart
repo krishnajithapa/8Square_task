@@ -30,13 +30,14 @@ class _CategoryCardState extends State<CategoryCard> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               child: Center(
-                child: Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Flexible(child: Icon(Icons.menu_book_sharp)),
-                    const SizedBox(
-                      width: 20,
-                    ),
+                    const Flexible(
+                        child: Icon(
+                      Icons.menu_book_sharp,
+                      size: 100,
+                    )),
                     Flexible(
                       child: Text(
                         widget.title.toUpperCase(),

@@ -1,5 +1,8 @@
 import 'package:cat_api_task/models/favourite.dart';
+import 'package:cat_api_task/ui/favourite/providers/favourite_provider.dart';
+import 'package:cat_api_task/ui/voting/providers/voting_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FavCatCard extends StatelessWidget {
   const FavCatCard({Key? key, required this.fav}) : super(key: key);
@@ -18,7 +21,12 @@ class FavCatCard extends StatelessWidget {
                 image: DecorationImage(
                     image: NetworkImage(fav.image!.url!), fit: BoxFit.cover)),
           ),
-          ElevatedButton(onPressed: () {}, child: const Text("unfav")),
+          ElevatedButton(
+              onPressed: () {
+                context.read<VotingProvider>().removeFavourite(fav.id!);
+                context.read<FavouriteProvider>().getAllFavourites();
+              },
+              child: const Text("unfav")),
         ],
       ),
     );

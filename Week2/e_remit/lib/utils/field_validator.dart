@@ -7,8 +7,8 @@ class Validator {
     if (value!.isEmpty) {
       return "First Name is required.";
     }
-    var regExString = RegExp("^[A-Za-z ]*\$");
-    var regExLength = RegExp("^[A-Za-z ]{4,20}\$");
+    var regExString = RegExp("^[A-Za-z]*\$");
+    var regExLength = RegExp("^[A-Za-z]{4,20}\$");
     final isValidString = regExString.hasMatch(value);
     final isValidLength = regExLength.hasMatch(value);
     if (!isValidString) {
@@ -22,8 +22,8 @@ class Validator {
   }
 
   String? validateLastName(String? value) {
-    var regExString = RegExp("^[A-Za-z ]*\$");
-    var regExLength = RegExp("^[A-Za-z ]{4,20}\$");
+    var regExString = RegExp("^[A-Za-z]*\$");
+    var regExLength = RegExp("^[A-Za-z]{4,20}\$");
     final isValidString = regExString.hasMatch(value!);
     final isValidLength = regExLength.hasMatch(value);
 

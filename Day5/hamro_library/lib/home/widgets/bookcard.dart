@@ -1,7 +1,7 @@
+import 'package:dbhelper/dbhelper.dart';
+import 'package:dbhelper/model/models/book_model.dart';
 import 'package:flutter/material.dart';
-import 'package:hamro_library/home/models/book_model.dart';
 import 'package:hamro_library/home/providers/book_provider.dart';
-import 'package:hamro_library/home/services/database_helper.dart';
 import 'package:hamro_library/shared/utils/const.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,12 @@ class _BookCardState extends State<BookCard> {
             child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const Icon(Icons.menu_book_sharp),
+            const Flexible(
+              child: Icon(
+                Icons.menu_book_sharp,
+                size: 60,
+              ),
+            ),
             Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +49,10 @@ class _BookCardState extends State<BookCard> {
                   ),
                   Text("By: ${widget.book.author}"),
                   isNPR
-                      ? Text("NPR ${widget.book.price}")
+                      ? Text(
+                          "NPR ${widget.book.price}",
+                          style: TextStyle(color: Colors.red.shade600),
+                        )
                       : Text('USD ${usdPrice.toStringAsFixed(2)}')
                 ]),
             DropdownButton<String>(

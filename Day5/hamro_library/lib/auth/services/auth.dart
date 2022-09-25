@@ -1,5 +1,5 @@
+import 'package:dbhelper/model/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hamro_library/home/models/user.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
